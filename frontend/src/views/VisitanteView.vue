@@ -3,17 +3,17 @@
     <div class="container center">
             <div class="row container">
                   
-                  <h2 class="text-center">Administracion de datos Visitantes</h2>
+                  <h2 class="text-center animate__animated animate__heartBeat">Administracion de datos Visitantes</h2>
      
             </div>
     
             <div class="col-12 text-center">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Agregar
+                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="material-icons material-icons-outlined">add_circle</i> Agregar
                   </button>
     
                   <!-- Modal -->
-                  <div class="modal fade modal-dialog modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -60,8 +60,8 @@
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
-                          <button type="button" class="btn btn-primary"  v-on:click="registrar()">Guardar</button>
+                          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Salir</button>
+                          <button type="button" class="btn btn-outline-success"  v-on:click="registrar()">Guardar</button>
                         </div>
                       </div>
                     </div>
@@ -81,6 +81,7 @@
                               <th class="text-center">TIPO PARENTESCO</th>
                               <th class="text-center">SEXO</th>
                               <th class="text-center">TIPO VISITANTE</th>
+                              <th class="text-center">EDITAR</th>
                               <th class="text-center">ELIMINAR</th>
                             </tr>
                           </thead>
@@ -93,6 +94,11 @@
                                   <td class="text-center">{{i.tipo_parentesco}}</td>
                                   <td class="text-center">{{i.tipo_sexo}}</td>
                                   <td class="text-center">{{i.tipo_visitante}}</td>
+                                  <td class="text-center">
+                                <button type="button" class="btn btn-primary" v-on:click="editar(i.id)">
+                                    <i class="material-icons material-icons-outlined">edit</i>
+                                </button>
+                              </td>
                                   <td class="text-center">
                                     <button type="button" class="btn btn-primary" v-on:click="eliminar(i.id)">
                                         <i class="material-icons material-icons-outlined">person_remove</i>
@@ -151,7 +157,7 @@
         },
         editar(id) {
           console.log(id)
-          this.$router.push('editVisitante/' + id);
+          this.$router.push('editV/' + id);
         },
         eliminar(id) {
           console.log(id)

@@ -3,17 +3,17 @@
     <div class="container center">
             <div class="row container">
                   
-                  <h2 class="text-center">Administracion Visitas</h2>
+                  <h2 class="text-center animate__animated animate__heartBeat">Administracion Visitas</h2>
      
             </div>
     
             <div class="col-12 text-center">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Agregar
+                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="material-icons material-icons-outlined">add_circle</i> Agregar
                   </button>
                   
                   <!-- Modal -->
-                  <div class="modal fade modal-dialog modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -25,10 +25,10 @@
                             <input type="text" class="form-control" placeholder="id" aria-describedby="addon-wrapping" id="id" name="id" v-model="id">
                           </div>
                           <div class="input-group flex-nowrap">
-                            <input type="text" class="form-control" placeholder="Hora de Ingreso" aria-label="visi_h_ingreso" aria-describedby="addon-wrapping" id="visi_h_ingreso" name="visi_h_ingreso" v-model="visi_h_ingreso">
+                            <input type="time" class="form-control" placeholder="Hora de Ingreso" aria-label="visi_h_ingreso" aria-describedby="addon-wrapping" id="visi_h_ingreso" name="visi_h_ingreso" v-model="visi_h_ingreso">
                           </div>
                           <div class="input-group flex-nowrap">
-                            <input type="text" class="form-control" placeholder="Hora de salida" aria-describedby="addon-wrapping" id="visi_h_salida" name="visi_h_salida" v-model="visi_h_salida">
+                            <input type="time" class="form-control" placeholder="Hora de salida" aria-describedby="addon-wrapping" id="visi_h_salida" name="visi_h_salida" v-model="visi_h_salida">
                           </div>
                           <div class="input-group flex-nowrap">
                             <input type="date" class="form-control" placeholder="Fecha" aria-describedby="addon-wrapping" id="visi_fecha" name="visi_fecha" v-model="visi_fecha">
@@ -41,8 +41,8 @@
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
-                          <button type="button" class="btn btn-primary"  v-on:click="registrar()">Guardar</button>
+                          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Salir</button>
+                          <button type="button" class="btn btn-outline-success"  v-on:click="registrar()">Guardar</button>
                         </div>
                       </div>
                     </div>
@@ -62,6 +62,7 @@
                               <th class="text-center">VISITANTE</th>
                               <th class="text-center">ESTUDIANTE</th>
                               <th class="text-center">ELIMINAR</th>
+                              <th class="text-center">EDITAR</th>
                             </tr>
                           </thead>
                           <tbody v-for="i in Lista" :key="i.id">
@@ -72,6 +73,11 @@
                                   <td class="text-center">{{i.visi_fecha}}</td>
                                   <td class="text-center">{{i.visitante}}</td>
                                   <td class="text-center">{{i.estudiante}}</td>
+                                  <td class="text-center">
+                                <button type="button" class="btn btn-primary" v-on:click="editar(i.id)">
+                                    <i class="material-icons material-icons-outlined">edit</i>
+                                </button>
+                              </td>
                                   <td class="text-center">
                                     <button type="button" class="btn btn-primary" v-on:click="eliminar(i.id)">
                                         <i class="material-icons material-icons-outlined">person_remove</i>
@@ -86,11 +92,10 @@
     </template>
     
     <script>
-    
     import axios from 'axios';
     
     export default{
-      name: 'VisitaView',
+      name: 'VisitanteView',
       data() {
         return{
           Lista: null,
@@ -127,11 +132,10 @@
         },
         editar(id) {
           console.log(id)
-          this.$router.push('editVisitante/' + id);
+          this.$router.push('editVisita/' + id);
         },
         eliminar(id) {
           console.log(id)
-
             var op = window.confirm('¿Desea Eliminar al Visitante?')
 
             if (op){

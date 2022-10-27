@@ -3,36 +3,41 @@
 <div class="container center">
         <div class="row container">
               
-              <h2 class="text-center">Administracion de datos Personas</h2>
+              <h2 class="text-center animate__animated animate__heartBeat">Administracion de datos Personas</h2>
  
         </div>
 
         <div class="col-12 text-center">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Agregar
+              <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="material-icons material-icons-outlined">add_circle</i> Agregar
               </button>
 
               <!-- Modal -->
-              <div class="modal fade modal-dialog modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title container-center" id="exampleModalLabel">Ingresar Datos</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <br>
                     <div class="modal-body">
                       <div class="input-group flex-nowrap">
                         <input type="text" class="form-control" placeholder="Id" aria-describedby="addon-wrapping" id="id" name="id" v-model="id">
                       </div>
+                      <br>
                       <div class="input-group flex-nowrap">
                         <input type="text" class="form-control" placeholder="Nombre" aria-label="pers_nombre" aria-describedby="addon-wrapping" id="pers_nombre" name="pers_nombre" v-model="pers_nombre">
                       </div>
+                      <br>
                       <div class="input-group flex-nowrap">
                         <input type="text" class="form-control" placeholder="Apellido" aria-describedby="addon-wrapping" id="pers_apellido" name="pers_apellido" v-model="pers_apellido">
                       </div>
+                      <br>
                       <div class="input-group flex-nowrap">
                         <input type="text" class="form-control" placeholder="N° Identificacion" aria-describedby="addon-wrapping" id="pers_identificacion" name="pers_identificacion" v-model="pers_identificacion">
                       </div>
+                      <br>
                       <div class="input-group flex-nowrap">
                           <select class="form-select" v-model="tipo_identificacion" aria-label="Default select example" required>
                             <option selected disabled value="">Tipo de Identificacion</option>
@@ -44,8 +49,8 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
-                      <button type="button" class="btn btn-primary"  v-on:click="registrar()">Guardar</button>
+                      <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Salir</button>
+                      <button type="button" class="btn btn-outline-success"  v-on:click="registrar()">Guardar</button>
                     </div>
                   </div>
                 </div>
@@ -131,14 +136,19 @@ export default{
     },
     editar(id) {
       console.log(id)
-      this.$router.push('edit/' + id);
+      this.$router.push('Edit/' + id);
     },
     eliminar(id) {
       console.log(id)
-      axios.delete("http://localhost:8000/api/persona/" + id + "/").then(result => {
-        this.updated()
-        console.log(result);
-      })
+            var op = window.confirm('¿Desea Eliminar al Visitante?')
+
+            if (op){
+              axios.delete("http://localhost:8000/api/persona/" + id + "/").then(result => {
+              this.updated()
+              console.log(result);
+        })
+            }
+
     },
     updated() {
       let direccion = "http://localhost:8000/api/persona/";
@@ -148,11 +158,11 @@ export default{
     }
   },
   mounted(){
-    axios.get('http://localhost:8000/api/persona/').then(data => {
-      this.Lista = data.data;
-      //console.log( data.data);
-    })
-  },
+        axios.get('http://localhost:8000/api/persona/').then(data => {
+          this.Lista = data.data;
+          //console.log( data.data);
+        })
+      },
 }
 
 </script>

@@ -1,11 +1,11 @@
 <template>
 <div class="container center">
         <div class="row container">
-              <h2 class="text-center">Administracion de datos Estudiante</h2>
+              <h2 class="text-center animate__animated animate__heartBeat">Administracion de datos Estudiante</h2>
         </div>
 
         <div class="col-12 text-center">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="material-icons material-icons-outlined">add_circle</i> Agregar
               </button>
 
@@ -22,10 +22,10 @@
                             <input type="text" class="form-control" placeholder="Id" aria-describedby="addon-wrapping" id="id" name="id" v-model="id">
                           </div>
                           <div class="input-group flex-nowrap">
-                            <input type="text" class="form-control" placeholder="estu_edad" aria-label="estu_edad" aria-describedby="addon-wrapping" id="pers_nombre" name="estu_edad" v-model="estu_edad">
+                            <input type="text" class="form-control" placeholder="Estudiante" aria-label="estu_edad" aria-describedby="addon-wrapping" id="pers_nombre" name="estu_edad" v-model="estu_edad">
                           </div>
                           <div class="input-group flex-nowrap">
-                            <input type="text" class="form-control" placeholder="persona" aria-label="persona" aria-describedby="addon-wrapping" id="persona" name="persona" v-model="persona">
+                            <input type="text" class="form-control" placeholder="ID de Persona" aria-label="persona" aria-describedby="addon-wrapping" id="persona" name="persona" v-model="persona">
                           </div>
 
                           <select class="form-select" v-model="tipo_estado" aria-label="Default select example">
@@ -36,8 +36,8 @@
                           </select>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" v-on:click="registrar()">Guardar</button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-outline-success" v-on:click="registrar()">Guardar</button>
                       </div>
                     </div>
                   </div>

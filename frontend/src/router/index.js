@@ -13,9 +13,9 @@ const routes = [
     component: () => import('../views/PersonaView.vue')
   },
   {
-    path: '/edit/:id',
-    name: 'edit',
-    component: () => import('../components/edit/Edit.vue')
+    path: '/Edit/:id',
+    name: 'Edit',
+    component: () => import('../components/edit/EditarPersona.vue')
   },
   {
     path: '/estudiante',
@@ -33,15 +33,27 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/VisitanteView.vue')
   },
   {
+    path: '/editV/:id',
+    name: 'edit',
+    component: () => import(/* webpackChunkName: "about" */ '../components/edit/EditarVisitante.vue')
+  },
+  {
     path: '/visita',
     name: 'visita',
     component: () => import(/* webpackChunkName: "about" */ '../views/VisitasView.vue')
+  },
+  {
+    path: '/editVisita/:id',
+    name: 'edita',
+    component: () => import(/* webpackChunkName: "about" */ '../components/edit/EditarVisitas.vue')
   },
   {
     path: '/maestra',
     name: 'maestra',
     component: () => import(/* webpackChunkName: "about" */ '../views/MaestraView.vue')
   },
+
+  
 ]
 
 const router = createRouter({

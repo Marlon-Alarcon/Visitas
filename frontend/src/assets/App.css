@@ -31,6 +31,10 @@ body {
     font-weight: 600;
     margin-left: 10px;
     border-radius: 20px 0 0 20px;
+    color: #0096FF;
+  }
+  .list-group-item{
+    padding: 12px;
   }
   .text-gradient {
     font-size: 3rem;
@@ -68,4 +72,9 @@ body {
     background-color: #DFF6FF!important;
   
 }
-#page-content-wrapper{background-color: #EAEAEA;}
+
+.material-icons{
+  display:inline-block;
+  vertical-align:top;
+}
+#page-content-wrapper{background-color: #F1F1F1;}

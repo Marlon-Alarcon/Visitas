@@ -3,17 +3,18 @@
     <div class="container center">
             <div class="row container">
                   
-                  <h2 class="text-center">Administracion Visitas</h2>
+                  <h2 class="text-center animate__animated animate__heartBeat">Administrar datos Maestros</h2>
      
             </div>
+            
     
             <div class="col-12 text-center">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Agregar
+                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="material-icons material-icons-outlined">add_circle</i> Agregar
                   </button>
                   
                   <!-- Modal -->
-                  <div class="modal fade modal-dialog modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -81,11 +82,10 @@
     </template>
     
     <script>
-    
     import axios from 'axios';
     
     export default{
-      name: 'VisitaView',
+      name: 'MaestraView',
       data() {
         return{
           Lista: null,
@@ -124,7 +124,7 @@
         eliminar(id) {
           console.log(id)
 
-            var op = window.confirm('¿Desea Eliminar al Visitante?')
+            var op = window.confirm('¿Desea Eliminar un dato maestro?')
 
             if (op){
             axios.delete("http://localhost:8000/api-m/maestra/" + id + "/").then(result => {
@@ -148,5 +148,4 @@
         })
       },
     }
-    
     </script>

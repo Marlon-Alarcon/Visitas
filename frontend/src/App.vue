@@ -3,26 +3,47 @@
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading text-center"><h1 class="text-gradient text-center" ><b>Vue Sidebar</b></h1></div>
+      <div class="sidebar-heading text-center">
+        <h1 class="text-gradient text-center"><b>Vue Sidebar</b></h1>
+      </div>
       <br>
+      
       <div class="list-group list-group-flush">
         <a>
-          <router-link to ="/" class="list-group-item list-group-item-action bg-light">Home</router-link>
+          <router-link to="/" class="list-group-item list-group-item-action bg-light "><i
+              class="material-icons material-icons-outlined icono">home</i> Home</router-link>
+        </a>
+
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <i class="material-icons material-icons-outlined icono">groups</i><a> Personas</a>
+              </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+              data-bs-parent="#accordionFlushExample">
+              <a>
+                <router-link to="/persona" class="list-group-item list-group-item-action bg-light "><i
+                    class="material-icons material-icons-outlined icono">person</i> Personas</router-link>
+              </a>
+              <a>
+                <router-link to="/estudiante" class="list-group-item list-group-item-action bg-light "><i
+                    class="material-icons material-icons-outlined icono">school</i> Estudiante</router-link>
+              </a>
+              <a>
+                <router-link to="/visitante" class="list-group-item list-group-item-action bg-light "><i
+                    class="material-icons material-icons-outlined icono">hail</i> Visitantes</router-link>
+              </a>
+            </div>
+          </div>
+        </div>
+        <a>
+          <router-link to ="/visita" class="list-group-item list-group-item-action bg-light "><i class="material-icons material-icons-outlined icono">diversity_3</i>  Visita</router-link>
         </a>
         <a>
-          <router-link to ="/persona" class="list-group-item list-group-item-action bg-light">Personas</router-link>
-        </a>
-        <a>
-          <router-link to ="/estudiante" class="list-group-item list-group-item-action bg-light">Estudiante</router-link>
-        </a>
-        <a>
-          <router-link to ="/visitante" class="list-group-item list-group-item-action bg-light">Visitantes</router-link>
-        </a>
-        <a>
-          <router-link to ="/visita" class="list-group-item list-group-item-action bg-light">Visita</router-link>
-        </a>
-        <a>
-          <router-link to ="/maestra" class="list-group-item list-group-item-action bg-light">Maestra</router-link>
+          <router-link to ="/maestra" class="list-group-item list-group-item-action bg-light "><i class="material-icons material-icons-outlined icono">settings_suggest</i>  Maestra</router-link>
         </a>
       </div>
     </div>
@@ -76,6 +97,9 @@
 
 <style>
  /*App.css*/ 
+ .icono{
+  color: #66BFBF;
+}
 </style>
 
 <script>
