@@ -24,18 +24,23 @@
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="id" aria-describedby="addon-wrapping" id="id" name="id" v-model="id">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="time" class="form-control" placeholder="Hora de Ingreso" aria-label="visi_h_ingreso" aria-describedby="addon-wrapping" id="visi_h_ingreso" name="visi_h_ingreso" v-model="visi_h_ingreso">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="time" class="form-control" placeholder="Hora de salida" aria-describedby="addon-wrapping" id="visi_h_salida" name="visi_h_salida" v-model="visi_h_salida">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="date" class="form-control" placeholder="Fecha" aria-describedby="addon-wrapping" id="visi_fecha" name="visi_fecha" v-model="visi_fecha">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="Id de Visitante" aria-describedby="addon-wrapping" id="visitante" name="visitante" v-model="visitante">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="Id de Estudiante" aria-describedby="addon-wrapping" id="estudiante" name="estudiante" v-model="estudiante">
                           </div>
@@ -52,7 +57,7 @@
                     <div class="col-md-12">
                       <br>
                       <br>
-                        <table class="table table-primary table-striped table-bordered table-hover">
+                        <table class="table table-primary table-striped table-bordered table-hover table-responsive">
                           <thead>
                             <tr>
                               <th class="text-center">ID</th>
@@ -91,74 +96,94 @@
     
     </template>
     
-    <script>
-    import axios from 'axios';
-    
-    export default{
-      name: 'VisitanteView',
-      data() {
-        return{
-          Lista: null,
-          id: "",
-          visi_h_ingreso: "",
-          visi_h_salida: "",
-          visi_fecha: "",
-          visitante: "",
-          estudiante: "",
-        }
-      },
-      methods: {
-        registrar(){
-          let post = {
-          "id": this.id,
-          "visi_h_ingreso": this.visi_h_ingreso,
-          "visi_h_salida": this.visi_h_salida,
-          "visi_fecha": this.visi_fecha,
-          "visitante": this.visitante,
-          "estudiante": this.estudiante,
-          }
-          axios.post('http://localhost:8000/api-v/Visita/', post)
-            .then(result => {
-              this.id="";
-              this.visi_h_ingreso="";
-              this.visi_h_salida="";
-              this.visi_fecha="";
-              this.visitante="";
-              this.estudiante="";
-              this.updated()
-    
-              console.log(result)
-            })
-        },
-        editar(id) {
-          console.log(id)
-          this.$router.push('editVisita/' + id);
-        },
-        eliminar(id) {
-          console.log(id)
-            var op = window.confirm('¿Desea Eliminar al Visitante?')
+<script>
+import axios from 'axios';
+import Swal from 'sweetalert2'
 
-            if (op){
-            axios.delete("http://localhost:8000/api-v/Visita/" + id + "/").then(result => {
+
+export default {
+  name: 'VisitanteView',
+  data() {
+    return {
+      Lista: null,
+      id: "",
+      visi_h_ingreso: "",
+      visi_h_salida: "",
+      visi_fecha: "",
+      visitante: "",
+      estudiante: "",
+    }
+  },
+  methods: {
+    registrar() {
+      let post = {
+        "id": this.id,
+        "visi_h_ingreso": this.visi_h_ingreso,
+        "visi_h_salida": this.visi_h_salida,
+        "visi_fecha": this.visi_fecha,
+        "visitante": this.visitante,
+        "estudiante": this.estudiante,
+      }
+      axios.post('http://localhost:8000/api-v/Visita/', post)
+        .then(result => {
+          this.id = "";
+          this.visi_h_ingreso = "";
+          this.visi_h_salida = "";
+          this.visi_fecha = "";
+          this.visitante = "";
+          this.estudiante = "";
+          Swal.fire({
+            icon: 'success',
+            title: 'Excelente',
+            text: 'Datos agregados correctamente!',
+          })
+          this.updated()
+
+          console.log(result)
+        })
+    },
+    editar(id) {
+      console.log(id)
+      this.$router.push('editVisita/' + id);
+    },
+    eliminar(id) {
+      console.log(id)
+      Swal.fire({
+        title: 'Desea eliminarlo?',
+        text: "Esta acción es irreversible!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Eliminar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete("http://localhost:8000/api-v/Visita/" + id + "/").then(result => {
             this.updated()
             console.log(result);
-             })
-         }
-         
-        },
-        updated() {
-          let direccion = "http://localhost:8000/api-v/Visita/";
-          axios.get(direccion).then(data => {
-            this.Lista = data.data
           })
+          Swal.fire(
+            'Eliminado!',
+            'Dato eliminado correctamente.',
+            'success'
+          )
         }
-      },
-      mounted(){
-        axios.get('http://localhost:8000/api-v/Visita/').then(data => {
-          this.Lista = data.data;
-          //console.log( data.data);
-        })
-      },
+      })
+
+    },
+    updated() {
+      let direccion = "http://localhost:8000/api-v/Visita/";
+      axios.get(direccion).then(data => {
+        this.Lista = data.data
+      })
     }
-    
-    </script>
+  },
+  mounted() {
+    axios.get('http://localhost:8000/api-v/Visita/').then(data => {
+      this.Lista = data.data;
+      //console.log( data.data);
+    })
+  },
+}
+
+</script>

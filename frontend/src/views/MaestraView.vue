@@ -25,15 +25,19 @@
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="id" aria-describedby="addon-wrapping" id="id" name="id" v-model="id">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="Nombre" aria-label="maes_nombre" aria-describedby="addon-wrapping" id="maes_nombre" name="maes_nombre" v-model="maes_nombre">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="Valor" aria-describedby="addon-wrapping" id="maes_valor" name="maes_valor" v-model="maes_valor">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="Dependencia" aria-describedby="addon-wrapping" id="maes_dependencia" name="maes_dependencia" v-model="maes_dependencia">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="Estado" aria-describedby="addon-wrapping" id="maes_tipo_estado" name="maes_tipo_estado" v-model="maes_tipo_estado">
                           </div>
@@ -50,7 +54,7 @@
                     <div class="col-md-12">
                       <br>
                       <br>
-                        <table class="table table-primary table-striped table-bordered table-hover">
+                        <table class="table table-primary table-striped table-bordered table-hover table-responsive">
                           <thead>
                             <tr>
                               <th class="text-center">ID</th>
@@ -83,6 +87,7 @@
     
     <script>
     import axios from 'axios';
+    import Swal from 'sweetalert2'
     
     export default{
       name: 'MaestraView',
@@ -112,6 +117,12 @@
               this.maes_valor="";
               this.maes_dependencia="";
               this.maes_tipo_estado="";
+
+              Swal.fire({
+              icon: 'success',
+                title: 'Excelente',
+                text: 'Datos agregados correctamente!',
+              })
               this.updated()
     
               console.log(result)

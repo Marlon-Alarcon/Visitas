@@ -14,9 +14,9 @@
               class="material-icons material-icons-outlined icono">home</i> Home</router-link>
         </a>
 
-        <div class="accordion accordion-flush" id="accordionFlushExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
+        <div class="accordion accordion-flush " id="accordionFlushExample">
+          <div class="accordion-item bg-light">
+            <h2 class="accordion-header" id="flush-headingOne ">
               <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse"
                 data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                 <i class="material-icons material-icons-outlined icono">groups</i><a> Personas</a>
@@ -25,7 +25,7 @@
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
               data-bs-parent="#accordionFlushExample">
               <a>
-                <router-link to="/persona" class="list-group-item list-group-item-action bg-light "><i
+                <router-link to="/persona" class="list-group-item list-group-item-action bg-light"><i
                     class="material-icons material-icons-outlined icono">person</i> Personas</router-link>
               </a>
               <a>
@@ -40,7 +40,7 @@
           </div>
         </div>
         <a>
-          <router-link to ="/visita" class="list-group-item list-group-item-action bg-light "><i class="material-icons material-icons-outlined icono">diversity_3</i>  Visita</router-link>
+          <router-link to ="/visita" class="list-group-item list-group-item-action bg-light"><i class="material-icons material-icons-outlined icono">diversity_3</i>  Visita</router-link>
         </a>
         <a>
           <router-link to ="/maestra" class="list-group-item list-group-item-action bg-light "><i class="material-icons material-icons-outlined icono">settings_suggest</i>  Maestra</router-link>
@@ -90,6 +90,7 @@
     </div>
     <!-- /#page-content-wrapper -->
 
+    
   </div>
 
   <!-- /#wrapper -->

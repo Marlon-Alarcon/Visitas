@@ -21,13 +21,15 @@
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="Id" aria-describedby="addon-wrapping" id="id" name="id" v-model="id">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
-                            <input type="text" class="form-control" placeholder="Estudiante" aria-label="estu_edad" aria-describedby="addon-wrapping" id="pers_nombre" name="estu_edad" v-model="estu_edad">
+                            <input type="text" class="form-control" placeholder="Edad de estudiante" aria-label="estu_edad" aria-describedby="addon-wrapping" id="pers_nombre" name="estu_edad" v-model="estu_edad">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="ID de Persona" aria-label="persona" aria-describedby="addon-wrapping" id="persona" name="persona" v-model="persona">
                           </div>
-
+                          <br>
                           <select class="form-select" v-model="tipo_estado" aria-label="Default select example">
                             <option selected disabled value="">Tipo de Estado</option>
                             <option value="11">Activo</option>
@@ -48,7 +50,7 @@
                 <div class="col-md-12">
                   <br>
                   <br>
-                    <table class="table table-primary table-striped table-bordered table-hover">
+                    <table class="table table-primary table-striped table-bordered table-hover table-responsive">
                       <thead>
                         <tr>
                           <th class="text-center">ID</th>
@@ -66,12 +68,12 @@
                               <td class="text-center">{{i.persona}}</td>
                               <td class="text-center">{{i.tipo_estado}}</td>
                               <td class="text-center">
-                                <button type="button" class="btn btn-primary" v-on:click="editar(i.id)">
+                                <button type="button" class="btn btn-outline-primary" v-on:click="editar(i.id)">
                                     <i class="material-icons material-icons-outlined">edit</i>
                                 </button>
                               </td>
                               <td class="text-center">
-                                <button type="button" class="btn btn-primary" v-on:click="eliminar(i.id)">
+                                <button type="button" class="btn btn-outline-primary" v-on:click="eliminar(i.id)">
                                     <i class="material-icons material-icons-outlined">person_remove</i>
                                 </button>
                               </td>
@@ -83,6 +85,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 export default{
   name: 'EstudianteView',
@@ -109,6 +112,13 @@ export default{
           this.estu_edad="";
           this.persona="";
           this.tipo_estado="";
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Excelente',
+            text: 'Datos agregados correctamente!',
+          })
+
           this.updated()
 
           console.log(result)
@@ -121,15 +131,27 @@ export default{
 
     eliminar(id) {
       console.log(id)
-
-      var op = window.confirm('¿Desea Eliminar al estudiante?')
-
-      if (op){
-        axios.delete("http://localhost:8000/api/estudiante/" + id + "/").then(result => {
-        this.updated()
-        console.log(result);
-      })
-      }
+      Swal.fire({
+      title: 'Desea eliminarlo?',
+      text: "Esta acción es irreversible!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axios.delete("http://localhost:8000/api/estudiante/" + id + "/").then(result => {
+              this.updated()
+              console.log(result);
+        })
+            Swal.fire(
+              'Eliminado!',
+              'Dato eliminado correctamente.',
+              'success'
+            )
+          }
+        })
     },
 
     updated() {

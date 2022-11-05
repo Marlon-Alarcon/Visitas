@@ -24,15 +24,19 @@
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="Id" aria-describedby="addon-wrapping" id="id" name="id" v-model="id">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="Telefono" aria-label="visit_telefono" aria-describedby="addon-wrapping" id="visit_telefono" name="visit_telefono" v-model="visit_telefono">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="Lugar de Procedencia" aria-describedby="addon-wrapping" id="visit_procedencia" name="visit_procedencia" v-model="visit_procedencia">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                             <input type="text" class="form-control" placeholder="ID Persona" aria-describedby="addon-wrapping" id="pers_identificacion" name="pers_identificacion" v-model="persona">
                           </div>
+                          <br>
                           <div class="input-group flex-nowrap">
                               <select class="form-select" v-model="tipo_parentesco" aria-label="Default select example" required>
                                 <option selected disabled value="">Parentesco</option>
@@ -42,7 +46,7 @@
                                 <option value="9">Otros</option>
                               </select>
                           </div>
-
+                          <br>
                           <div class="input-group flex-nowrap">
                               <select class="form-select" v-model="tipo_sexo" aria-label="Default select example" required>
                                 <option selected disabled value="">Sexo</option>
@@ -50,7 +54,7 @@
                                 <option value="16">Femenino</option>
                               </select>
                           </div>
-
+                          <br>
                           <div class="input-group flex-nowrap">
                               <select class="form-select" v-model="tipo_visitante" aria-label="Default select example" required>
                                 <option selected disabled value="">Visitante</option>
@@ -71,7 +75,7 @@
                     <div class="col-md-12">
                       <br>
                       <br>
-                        <table class="table table-primary table-striped table-bordered table-hover">
+                        <table class="table table-primary table-striped table-bordered table-hover table-responsive">
                           <thead>
                             <tr>
                               <th class="text-center">ID</th>
@@ -115,6 +119,7 @@
     <script>
     
     import axios from 'axios';
+    import Swal from 'sweetalert2'
     
     export default{
       name: 'VisitanteView',
@@ -150,6 +155,12 @@
               this.tipo_parentesco="";
               this.tipo_sexo="";
               this.tipo_visitante="";
+
+              Swal.fire({
+                icon: 'success',
+                title: 'Excelente',
+                text: 'Datos agregados correctamente!',
+              })
               this.updated()
     
               console.log(result)
@@ -161,16 +172,27 @@
         },
         eliminar(id) {
           console.log(id)
-
-            var op = window.confirm('¿Desea Eliminar al Visitante?')
-
-            if (op){
-            axios.delete("http://localhost:8000/api/visitante/" + id + "/").then(result => {
-            this.updated()
-            console.log(result);
-             })
-         }
-         
+          Swal.fire({
+          title: 'Desea eliminarlo?',
+          text: "Esta acción es irreversible!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Eliminar!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                axios.delete("http://localhost:8000/api/visitante/" + id + "/").then(result => {
+                  this.updated()
+                  console.log(result);
+            })
+                Swal.fire(
+                  'Eliminado!',
+                  'Dato eliminado correctamente.',
+                  'success'
+                )
+              }
+            })
         },
         updated() {
           let direccion = "http://localhost:8000/api/visitante/";

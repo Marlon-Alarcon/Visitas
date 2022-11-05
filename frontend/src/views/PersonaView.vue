@@ -3,7 +3,7 @@
 <div class="container center">
         <div class="row container">
               
-              <h2 class="text-center animate__animated animate__heartBeat">Administracion de datos Personas</h2>
+              <h2 class="text-center animate__animated animate__heartBeat"> Administracion de datos Personas </h2>
  
         </div>
 
@@ -60,7 +60,7 @@
                 <div class="col-md-12">
                   <br>
                   <br>
-                    <table class="table table-primary table-striped table-bordered table-hover">
+                    <table class="table table-primary table-striped table-bordered table-hover table-responsive">
                       <thead>
                         <tr>
                           <th class="text-center">ID</th>
@@ -100,6 +100,7 @@
 <script>
 
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 export default{
   name: 'PersonaView',
@@ -129,6 +130,13 @@ export default{
           this.pers_apellido="";
           this.pers_identificacion="";
           this.tipo_identificacion="";
+          
+          Swal.fire({
+            icon: 'success',
+            title: 'Excelente',
+            text: 'Datos agregados correctamente!',
+          })
+
           this.updated()
 
           console.log(result)
@@ -140,14 +148,27 @@ export default{
     },
     eliminar(id) {
       console.log(id)
-            var op = window.confirm('¿Desea Eliminar al Visitante?')
-
-            if (op){
-              axios.delete("http://localhost:8000/api/persona/" + id + "/").then(result => {
+      Swal.fire({
+      title: 'Desea eliminarlo?',
+      text: "Esta acción es irreversible!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axios.delete("http://localhost:8000/api/persona/" + id + "/").then(result => {
               this.updated()
               console.log(result);
         })
-            }
+            Swal.fire(
+              'Eliminado!',
+              'Dato eliminado correctamente.',
+              'success'
+            )
+          }
+        })
 
     },
     updated() {

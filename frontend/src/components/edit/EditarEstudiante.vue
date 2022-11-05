@@ -1,33 +1,47 @@
 <template>
   <h1>Editar Estudiante</h1>
+  <br>
       <form>
           <!--<td>
               <input type="text" id="id" name="id" v-model="Lista.id">
           </td>-->
-          <div class="mx-auto"  style="width: 300px;">
-            <label for="exampleInputEmail1" class="form-label">Ingrese la edad </label>
-              <input type="text" id="estu_edad" name="estu_edad" v-model="Lista.estu_edad">
+          <div class="form-group row justify-content-center">
+            <label for="input" class="col-sm-2 col-form-label">Edite la edad </label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="estu_edad" name="estu_edad" v-model="Lista.estu_edad">
+            </div>
           </div>
           <br>
-          <div class="mx-auto"  style="width: 300px;">
-            <label for="exampleInputEmail1" class="form-label">Ingrese el Id de Persona </label>
-              <input type="text" id="persona" name="persona" v-model="Lista.persona">
+          <div class="form-group row justify-content-center">
+            <label for="input" class="col-sm-2 col-form-label">Edite el Id de la Persona </label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="persona" name="persona" v-model="Lista.persona">
+            </div>       
           </div>
           <br>
-          <div class="mx-auto input-group flex-nowrap"  style="width: 300px;">
-            <select class="form-select" v-model="Lista.tipo_estado" aria-label="Default select example" required>
-              <option selected disabled value="">Tipo de estado</option>
-              <option value="11">Activo</option>
-              <option value="12">Inactivo</option>
-              <option value="13">Suspendido</option>
-            </select>
+          <div class="form-group row justify-content-center">
+            <label for="input" class="col-sm-2 col-form-label">Seleccione el estado </label>
+            <div class="col-sm-4">
+              <select class="form-select" v-model="Lista.tipo_estado" aria-label="Default select example" required>
+                <option selected disabled value="">Tipo de estado</option>
+                <option value="11">Activo</option>
+                <option value="12">Inactivo</option>
+                <option value="13">Suspendido</option>
+              </select>
+            </div>
           </div>
       </form>
-  <button type="submit" class="btn btn-primary" v-on:click="editar()">Editar</button>
+      <br>
+  <button type="submit" class="btn btn-outline-success" v-on:click="editar()">Editar</button>
+
+  <div class="space"></div>
+
+  <button type="button" class="btn btn-outline-danger" v-on:click="salir()">Salir</button>
 </template>
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 export default {
 name: "EditarEstudiante",
@@ -47,11 +61,19 @@ methods: {
       axios.put("http://localhost:8000/api/estudiante/" + this.$route.params.id + "/", post).then(result => {
           console.log(result);
           //this.Lista.id="";
+          Swal.fire({
+            icon: 'success',
+            title: 'Datos Editados',
+          })
+
           this.Lista.estu_edad="";
           this.Lista.persona="";
           this.Lista.tipo_estado="";
       })
   },
+  salir(){
+    this.$router.push("/estudiante");
+  }
 },
 
 mounted() {
@@ -63,3 +85,11 @@ mounted() {
 },
 }
 </script>
+
+<style>
+.space {
+  width: 10px;
+  height: auto;
+  display: inline-block;
+}
+</style>
