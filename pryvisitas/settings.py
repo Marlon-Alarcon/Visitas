@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'apps.personas.apps.PersonasConfig',
     'apps.visitas.apps.VisitasConfig',
     'rest_framework',
+    'django_filters',
     'corsheaders',
+    'django_extensions',
     
 ]
 

@@ -199,7 +199,7 @@
           axios.get(direccion).then(data => {
             this.Lista = data.data
           })
-        }
+        },
       },
       mounted(){
         axios.get('http://localhost:8000/api/visitante/').then(data => {

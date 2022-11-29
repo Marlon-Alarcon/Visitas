@@ -1,16 +1,35 @@
 <template>
-
 <div class="container center">
         <div class="row container">
               
-              <h2 class="text-center animate__animated animate__heartBeat"> Administracion de datos Personas </h2>
+              <h2 class="text-center animate__animated animate__heartBeat"> Administrar Datos </h2>
  
         </div>
 
-        <div class="col-12 text-center">
-              <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <div class="col-12">
+          <br>
+          <div class="row">
+              <div class="col clearfix">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="material-icons material-icons-outlined">add_circle</i> Agregar
               </button>
+              </div>
+              <div class="col clearfix">
+                <button @click="historial" type="button" class="btn btn-outline-secondary" >Historial de datos editados</button>
+              </div>
+              <div class="col clearfix">
+                <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle btn btn-warning" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Exportar
+                </button>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item" @click="excel"><i class="material-icons material-icons-outlined">table_chart</i> Excel</button></li>
+                  <li><button class="dropdown-item" @click="exportToPDF"><i class="material-icons material-icons-outlined">picture_as_pdf</i> PDF</button></li>
+                </ul>
+              </div>
+              </div>
+          </div>
+              
 
               <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -57,9 +76,11 @@
               </div>
             </div>
                 
-                <div class="col-md-12">
+                <div class="col-md-12" ref="document">
                   <br>
                   <br>
+                  <div id="element-to-convert">
+
                     <table class="table table-primary table-striped table-bordered table-hover table-responsive">
                       <thead>
                         <tr>
@@ -79,6 +100,7 @@
                               <td class="text-center">{{i.pers_apellido}}</td>
                               <td class="text-center">{{i.pers_identificacion}}</td>
                               <td class="text-center">{{i.tipo_identificacion}}</td>
+                              
                               <td class="text-center">
                                 <button type="button" class="btn btn-primary" v-on:click="editar(i.id)">
                                     <i class="material-icons material-icons-outlined">edit</i>
@@ -92,15 +114,16 @@
                           </tr>
                       </tbody>
                     </table>
+                  </div>
                 </div>
 </div>
-
 </template>
 
 <script>
 
 import axios from 'axios';
-import Swal from 'sweetalert2'
+import html2pdf from "html2pdf.js";
+import exportXlsFile from 'export-from-json'
 
 export default{
   name: 'PersonaView',
@@ -116,6 +139,7 @@ export default{
   },
   methods: {
     registrar(){
+      const Swal = require('sweetalert2')
       let post = {
       "id": this.id,
       "pers_nombre": this.pers_nombre,
@@ -146,16 +170,54 @@ export default{
       console.log(id)
       this.$router.push('Edit/' + id);
     },
+    exportToPDF() {
+      const Swal = require('sweetalert2')
+        Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'PDF GENERADO',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      html2pdf(document.getElementById("element-to-convert"), {
+				margin: 1,
+  			filename: "List Personas.pdf",
+        jsPDF: { unit: 'in', format: 'A3', orientation: 'landscape', text: 'hola' }
+			});
+    },
+
+    excel(){
+      const Swal = require('sweetalert2')
+        Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Excel GENERADO',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      const data = this.Lista;
+      const fileName = 'Listpersonas';
+      const exportType = exportXlsFile.types.xls
+      exportXlsFile({data, fileName, exportType})
+    },
+
+    
+    historial(){
+      this.$router.push("/actualizando");
+    },
     eliminar(id) {
+      const Swal = require('sweetalert2')
+
       console.log(id)
       Swal.fire({
-      title: 'Desea eliminarlo?',
+      title: '¿Desea eliminarlo?',
       text: "Esta acción es irreversible!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#54B435',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Eliminar!'
+      confirmButtonText: 'Si, Eliminar!',
+      cancelButtonText: 'Cancelar',
         }).then((result) => {
           if (result.isConfirmed) {
             axios.delete("http://localhost:8000/api/persona/" + id + "/").then(result => {
@@ -163,7 +225,7 @@ export default{
               console.log(result);
         })
             Swal.fire(
-              'Eliminado!',
+              '!Eliminado!',
               'Dato eliminado correctamente.',
               'success'
             )

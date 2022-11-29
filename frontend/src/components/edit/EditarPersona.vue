@@ -1,5 +1,5 @@
 <template>
-  <h1>Editar Persona</h1>
+  <h1>Editar a Personas</h1>
   <br>
   <br>
       <form >

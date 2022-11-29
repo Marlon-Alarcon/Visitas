@@ -28,6 +28,11 @@ body {
     margin-left: 0;
   }
 
+  .list:hover{
+    color: #0096FF;
+    font-weight: 600;
+  }
+
   .list-group-item:hover {
     font-weight: 600;
     margin-left: 12px;

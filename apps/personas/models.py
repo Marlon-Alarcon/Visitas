@@ -32,3 +32,12 @@ class Visitante(models.Model):
 
     def __str__(self):
         return str (self.persona)
+
+
+class Actualizando (models.Model):
+    pers = models.ForeignKey(Persona, related_name='pers', null=True, blank=True, on_delete=models.CASCADE)
+    fecha = models.DateField()
+    accion = models.CharField(max_length=10)
+
+    def __str__(self):
+        return str (self.fecha)

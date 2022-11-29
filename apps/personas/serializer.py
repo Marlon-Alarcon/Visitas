@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Estudiante, Persona, Visitante
+from .models import Estudiante, Persona, Visitante, Actualizando
 
 
 class PersonaSerializers(serializers.ModelSerializer):
@@ -56,4 +56,17 @@ class VisitanteSerializers(serializers.ModelSerializer):
             'tipo_parentesco' : instance.tipo_parentesco.maes_nombre,
             'tipo_sexo' : instance.tipo_sexo.maes_nombre,
             'tipo_visitante' : instance.tipo_visitante.maes_nombre,
+        }
+
+class ActualizandoSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Actualizando
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        return {
+            'id': instance.id,
+            'fecha' : instance.fecha,
+            'accion' : instance.accion,
+            'pers' : instance.pers.pers_nombre,
         }

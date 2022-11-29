@@ -67,17 +67,23 @@
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a> 
+                <router-link to="/actualizando" class="list bg-light nav-link ">
+                  <i class="material-icons material-icons-outlined icono">hail</i>
+                  Datos Actualizados</router-link>
+              
+               </a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Dropdown
               </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
+                <a class="dropdown-item"> <router-link to="/consulta" class="dec">consulta 1</router-link></a>
+                <a class="dropdown-item"> <router-link to="/consulta2" class="dec">consulta 2</router-link></a>
+                <a class="dropdown-item"> </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item"><router-link to="/muestra" class="dec">Consultas</router-link></a>
               </div>
             </li>
           </ul>
@@ -100,6 +106,10 @@
  /*App.css*/ 
  .icono{
   color: #66BFBF;
+}
+
+  .dec{
+  text-decoration: none;
 }
 </style>
 

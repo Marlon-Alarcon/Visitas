@@ -52,6 +52,36 @@ const routes = [
     name: 'maestra',
     component: () => import(/* webpackChunkName: "about" */ '../views/MaestraView.vue')
   },
+  {
+    path: '/actualizando',
+    name: 'actualizando',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Disparador/actualizando.vue')
+  },
+  {
+    path: '/consulta',
+    name: 'consulta',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Consultas/Consulta.vue')
+  },
+  {
+    path: '/consulta2',
+    name: 'consulta2',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Consultas/Consulta2.vue')
+  },
+  {
+    path: '/consulta3',
+    name: 'consulta3',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Consultas/Consulta3.vue')
+  },
+  {
+    path: '/consulta4',
+    name: 'consulta4',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Consultas/Consulta4.vue')
+  },
+  {
+    path: '/muestra',
+    name: 'muestra',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Consultas/Muestra.vue')
+  },
 
   
 ]

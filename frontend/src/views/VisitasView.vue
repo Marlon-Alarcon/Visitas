@@ -7,10 +7,18 @@
      
             </div>
     
-            <div class="col-12 text-center">
-                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="material-icons material-icons-outlined">add_circle</i> Agregar
-                  </button>
+            <div class="col-12">
+              <br>
+              <div class="row">
+                <div class="col clearfix">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      <i class="material-icons material-icons-outlined">add_circle</i> Agregar
+                    </button>
+                </div>
+              <div class="col clearfix">
+                <button @click="exportToPDF" type="button" class="btn btn-outline-warning" >Exportar como PDF</button>
+              </div>
+          </div>
                   
                   <!-- Modal -->
                   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -54,9 +62,10 @@
                   </div>
                 </div>
                     
-                    <div class="col-md-12">
+                    <div class="col-md-12" ref="document">
                       <br>
                       <br>
+                      <div id="element-to-convert">
                         <table class="table table-primary table-striped table-bordered table-hover table-responsive">
                           <thead>
                             <tr>
@@ -91,6 +100,8 @@
                               </tr>
                           </tbody>
                         </table>
+                      </div>
+                        
                     </div>
     </div>
     
@@ -99,6 +110,7 @@
 <script>
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import html2pdf from "html2pdf.js";
 
 
 export default {
@@ -145,6 +157,22 @@ export default {
     editar(id) {
       console.log(id)
       this.$router.push('editVisita/' + id);
+    },
+    exportToPDF() {
+      const Swal = require('sweetalert2')
+        Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'PDF GENERADO',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+      html2pdf(document.getElementById("element-to-convert"), {
+				margin: 1,
+  			filename: "List Visita.pdf",
+        jsPDF: { unit: 'in', format: 'A3', orientation: 'landscape' }
+			});
     },
     eliminar(id) {
       console.log(id)
